@@ -29,3 +29,27 @@ def view_deliveries(request):
         'today': date.today(),
         'just_logged_in': just_logged_in,
     })
+
+@login_required(login_url='operator_login')
+def update_delivery(request, delivery_id):
+    """
+    Update a specific delivery's details.
+    """
+
+    delivery = get_object_or_404(Delivery, id=delivery_id)
+    customer = delivery.customer
+
+    form = DeliveryForm(request.POST or None, instance=delivery)  
+
+    if request.method == 'POST':
+        if form.is_valid():
+            delivery_instance = form.save(commit=False)
+            delivery_instance.status = "Delivered"  
+            delivery_instance.save()
+
+            messages.success(request, 'Delivery Info Forwarded to Head Office Department!')
+
+            return redirect('delivery_department:view_deliveries')
+        
+
+    return render(request, 'delivery_department/pickup_form.html', {'form': form, 'customer': customer})
