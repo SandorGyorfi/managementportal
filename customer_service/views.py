@@ -46,3 +46,26 @@ def operator_login(request):
             error = 'Invalid credentials'
 
     return render(request, 'login.html', {'error': error})
+    
+@login_required(login_url='operator_login')
+def add_customer(request):
+    context = {}
+    
+    if request.session.pop('just_logged_in', False):
+        context['just_logged_in'] = True
+
+    if request.method == 'POST':
+        form = CustomerForm(request.POST)
+        if form.is_valid():
+            customer = form.save()
+            from financial_department.models import Payment
+            Payment.objects.create(customer=customer, status="Pending Payment")
+            context['message_display'] = True
+            form = CustomerForm()  
+        else:
+            context['form'] = form
+    else:
+        form = CustomerForm()
+
+    context['form'] = form
+    return render(request, 'customer_service/add_customer.html', context)    
