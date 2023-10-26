@@ -35,3 +35,46 @@ def view_payments(request):
     }
     
     return render(request, 'financial_department/payments.html', context)
+
+@login_required(login_url='operator_login')
+def process_payment(request, payment_id):
+    payment = Payment.objects.get(id=payment_id)
+    message = ""
+
+    if request.method == 'POST':
+        form = PaymentForm(request.POST, instance=payment)
+        
+        if form.is_valid():
+            amount_to_charge = 1000 
+            try:
+                stripe_charge = stripe.Charge.create(
+                    amount=amount_to_charge,
+                    currency='gbp',
+                    description=f'Charge for {payment.customer.full_name}',
+                    source='tok_visa'  
+                )
+                
+                if stripe_charge.paid:
+                   form.save()
+                   payment.status = "Payment Processed"
+                   payment.save()
+                   Delivery.objects.create(customer=payment.customer, delivery_date=payment.customer.requested_delivery_date)
+                   request.session['payment_processed'] = True  
+                   logger.info(f"Successfully processed payment for {payment.customer.full_name}")
+                   return redirect('financial_department:view_payments')
+                else:
+                    message = "Payment failed."
+                    logger.warning(f"Payment failed for {payment.customer.full_name}")
+            except stripe.error.StripeError as e:
+                message = f"Error processing payment: {e}"
+                logger.error(f"Stripe error for {payment.customer.full_name}: {e}")
+    else:
+        form = PaymentForm(instance=payment)
+    
+    context = {
+        'form': form, 
+        'message': message, 
+        'payments': [payment],
+        'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY
+    }
+    return render(request, 'financial_department/payments.html', context)
