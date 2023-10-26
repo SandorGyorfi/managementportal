@@ -6,6 +6,7 @@ from decouple import config
 from head_office.models import DepartmentUser
 
 # Create your views here.
+
 def operator_login(request):
     error = None
     if request.method == 'POST':
@@ -46,7 +47,7 @@ def operator_login(request):
             error = 'Invalid credentials'
 
     return render(request, 'login.html', {'error': error})
-    
+
 @login_required(login_url='operator_login')
 def add_customer(request):
     context = {}
@@ -68,4 +69,4 @@ def add_customer(request):
         form = CustomerForm()
 
     context['form'] = form
-    return render(request, 'customer_service/add_customer.html', context)    
+    return render(request, 'customer_service/add_customer.html', context)
