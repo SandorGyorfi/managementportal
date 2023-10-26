@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 from decouple import config
 
+STRIPE_PUBLIC_KEY = config('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = config('STRIPE_SECRET_KEY')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
     'financial_department',
     'delivery_department',
     'head_office',
+    'stripe',
 ]
 
 MIDDLEWARE = [
