@@ -70,3 +70,29 @@ li {
     padding: 1em;
     margin-bottom: 1em;
   }
+
+/*   Typography & Forms: */
+
+h1,
+h2 {
+  font-size: 30px;
+  margin-bottom: 1.2em;
+  color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 1.5em;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5em;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid var(--secondary-color);
+    box-sizing: border-box;
+  }
