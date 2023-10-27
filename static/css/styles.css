@@ -139,4 +139,17 @@ h2 {
     border-radius: 0;
     padding-right: 2em;
   }
+
+/*   Footer Styles:*/
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  footer p {
+    margin: 10px 0;
+  }
   
