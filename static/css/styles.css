@@ -1,0 +1,31 @@
+/*Basic Reset & Font Styles:*/
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+}
+
+/*Color Variables & Container:*/
+
+:root {
+    --primary-color: #024059;
+    --secondary-color: #03738c;
+    --error-color: #d4351c;
+    --white-color: #ffffff;
+    --panel-spacing: 20px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 2em auto;
+    padding: 1em;
+  }
