@@ -1,0 +1,88 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Management Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.1/css/all.min.css" />
+
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-bar">
+            Management Portal
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1>Login</h1>
+
+            {% if error %}
+            <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            <form method="post" action="{% url 'operator_login' %}">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="department">Department Selection</label>
+                    <select id="department" name="department" required class="browser-default">
+                        <option value="" disabled selected>Select a department</option>
+                        <option value="head_office">Head Office</option>
+                        <option value="customer_service">Customer Service</option>
+                        <option value="financial_department">Financial Department</option>
+                        <option value="delivery_department">Delivery Department</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">PIN Code</label>
+                    <input id="password" type="password" name="password" required>
+                </div>
+
+                <div class="button-container">
+                    <button type="submit" class="submit-button">Login</button>
+                    <button type="button" onclick="showFAQ()" class="faq-button">Need help to login?</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container_footer">
+            <p>&copy; {{ current_year }} Management Portal. All rights reserved.</p>
+            <p>For support, contact <a href="mailto:support@managementportal.com">support@managementportal.com</a></p>
+        </div>
+    </footer>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <script src="{% static 'js/faq.js' %}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
+    </script>
+    
+    <script>
+        let footerYear = document.querySelector("footer p");
+        footerYear.textContent = footerYear.textContent.replace("{{ current_year }}", new Date().getFullYear());
+    </script>
+</body>
+
+</html>
