@@ -29,3 +29,44 @@ li {
     margin: 2em auto;
     padding: 1em;
   }
+
+/* Header & Dashboard Styles:*/
+
+.header-bar {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    padding: 1em 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5em;
+  }
+  
+  .dashboard {
+    font-size: 60px;
+    text-transform: uppercase;
+    text-decoration: underline;
+  }
+
+/*  Panel & Alert Designs:*/
+
+.dashboard-title {
+    margin-bottom: var(--panel-spacing);
+  }
+  
+  .panel {
+    margin-bottom: var(--panel-spacing);
+  }
+  
+  .panel-row {
+    display: flex;
+    gap: var(--panel-spacing);
+    margin-bottom: var(--panel-spacing);
+  }
+  
+  .alert {
+    background-color: var(--error-color);
+    text-align: center;
+    color: var(--white-color);
+    padding: 1em;
+    margin-bottom: 1em;
+  }
