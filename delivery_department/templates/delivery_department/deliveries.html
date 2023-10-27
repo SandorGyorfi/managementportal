@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Deliveries - Management Portal{% endblock %}
+{% block navbar_title %}Delivery Department{% endblock %}
+
+{% block content %}
+<div class="header-flex-container">
+    <h2>Pending Deliveries:</h2>
+    <div class="button-container">
+        <button class="show-instructions">How to Use the Portal</button>
+    </div>
+</div>
+
+{% if just_logged_in %}
+<div id="welcomeMessage" class="{% if not session.welcomeShown %}visible{% else %}hidden{% endif %} center-align">
+   <h2>Welcome to the portal</h2> 
+</div>
+{% endif %}
+
+{% if delivery_instance.status == "Delivered" %}
+    <div id="submitMessage" class="hidden-message visible center-align">
+        <h2>Delivery Info Forwarded to Head Office Department</h2>
+    </div>
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+    <div id="errorMessage" class="visible center-align">
+        <h2>{{ message }}</h2>
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+{% if message %}
+<div id="errorMessage" class="visible center-align">
+    <h2>{{ message }}</h2>
+</div>
+{% endif %}
+
+<div class="how-to-use hidden">
+    <strong>How to Use the Delivery Department Portal:</strong>
+    <ol>
+        <li>Review the list of pending deliveries.</li>
+        <li>If a delivery is overdue, ask your manager to update the order.</li>
+        <li>Click on "Pickup" to handle a specific delivery.</li>
+    </ol>
+</div>
+
+{% if all_deliveries %}
+    <table style="width: 100%; border-spacing: 0 15px;">
+        <thead>
+            <tr>
+                <th>Customer Name</th>
+                <th>Delivery Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for delivery in all_deliveries %}
+            <tr class="{% if delivery.delivery_date < today %}overdue{% endif %}">
+                <td>{{ delivery.customer.full_name }}</td>
+                <td>{{ delivery.delivery_date }}</td>
+                <td>
+                {% if delivery.delivery_date < today %}
+                    <span>Ask your manager to update the order.</span>
+                {% endif %}
+
+                {% if delivery in todays_deliveries %}
+                    <a href="{% url 'delivery_department:pickup_delivery' delivery.id %}" class="submit-button">Pickup</a>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="center-align">No pending deliveries.</p>
+{% endif %}
+</div>
+
+<div class="button-container" style="margin-top: auto; margin-left: 80px;">
+    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/combinedService.js' %}"></script>
+{% endblock %}
