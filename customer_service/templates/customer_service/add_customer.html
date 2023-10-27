@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Customer Data - Management Portal{% endblock %}
+{% block navbar_title %}Customer Services Department{% endblock %}
+
+{% block content %}
+<div class="header-flex-container">
+    <h2>Add Customer Details:</h2>
+    <div class="button-container">
+        <button class="show-instructions">How to Use the Portal</button>
+    </div>
+</div>
+
+{% if just_logged_in %}
+<div id="welcomeMessage" class="visible center-align">
+   <h2>Welcome to the portal</h2> 
+</div>
+{% endif %}
+{% if message_display %}
+    <div id="submitMessage" class="hidden-message visible center-align">
+        <h2>Forwarded to Financial Department</h2> 
+    </div>
+    {% endif %}
+
+<div class="how-to-use hidden">
+    <strong>How to Use the Customer Service Portal:</strong>
+    <ol>
+        <li>Select the customer's preferences from the given choices.</li>
+        <li>Fill in the customer's full name and contact details accurately.</li>
+        <li>Choose the bed type based on the customer's request.</li>
+        <li>Pick a requested delivery date for the customer's order.</li>
+        <li>Click 'Submit' once all details are filled in.</li>
+    </ol>
+</div>
+
+
+
+<form method="post" action="{% url 'add_customer' %}">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            
+            {% if field.name == "requested_delivery_date" %}
+            <div class="datepicker-container">
+                <button type="button" class="open-calendar-btn" onclick="openDatepicker('{{ field.id_for_label }}');">Open Calendar</button>
+                <input type="text" class="datepicker center-align" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value|default:'' }}" required>
+            </div>
+    
+            {% elif field.name == "bed_type" %}
+                <select id="{{ field.id_for_label }}" name="{{ field.name }}" required class="browser-default">
+                    <option value="" disabled selected>Select an option</option>
+                    {% for option_value, option_label in field.field.choices %}
+                        <option value="{{ option_value }}">{{ option_label }}</option>
+                    {% endfor %}
+                </select>
+            {% elif field.field.widget.input_type == "text" or field.field.widget.input_type == "password" %}
+                <input id="{{ field.id_for_label }}" type="{{ field.field.widget.input_type }}" name="{{ field.name }}" required class="browser-default">
+            {% else %}
+                {{ field }}
+            {% endif %}
+            
+            {% if field.help_text %}
+                <span class="helper-text" data-error="wrong" data-success="right">{{ field.help_text }}</span>
+            {% endif %}
+            {% if field.errors %}
+                <span class="red-text">{{ field.errors.0 }}</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div class="actions-container" style="display: flex; justify-content: space-between;">
+        <button type="submit" id="submitMessage" class="submit-button">Submit</button>
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </div>
+</form>
+ 
+
+    
+    
+    
+    {% endblock %}
+    
+    {% block extra_js %}
+    <script src="{% static 'js/combinedService.js' %}"></script>
+
+    <script>
+    var elems = document.querySelectorAll('.datepicker');
+    var instances = M.Datepicker.init(elems, {
+    format: 'yyyy-mm-dd'
+});
+
+    window.openDatepicker = function(elementId) {
+    var instance = M.Datepicker.getInstance(document.getElementById(elementId));
+    instance.open();
+};
+
+    </script>
+    {% endblock %}
