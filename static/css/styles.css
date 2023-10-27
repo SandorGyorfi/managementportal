@@ -96,3 +96,47 @@ h2 {
     border: 1px solid var(--secondary-color);
     box-sizing: border-box;
   }
+
+/* Button Designs: */  
+
+.submit-button,
+.faq-button, .logout-button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.8em 1.5em;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s;
+}
+
+.how-to-use,
+.show-instructions,
+.open-calendar-btn {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.8em 1.5em;
+  border: none;
+}
+
+.submit-button:hover {
+    background-color: var(--secondary-color);
+  }
+  
+  .logout-button:hover {
+    background-color: var(--secondary-color);
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 6%;
+  }
+  
+  select {
+    appearance: none;
+    background-color: var(--white-color);
+    border-radius: 0;
+    padding-right: 2em;
+  }
+  
