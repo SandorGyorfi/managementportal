@@ -25,6 +25,6 @@ urlpatterns = [
     path('customer_service/', include('customer_service.urls')), 
     path('financial_department/', include('financial_department.urls')), 
     path('delivery_department/', include('delivery_department.urls')),  
-    path('head_office/', include('head_office.urls')), 
-
+    path('head_office/', include('head_office.urls')),
+    path('logout/', auth_views.LogoutView.as_view(next_page='operator_login'), name='logout'),
 ]
