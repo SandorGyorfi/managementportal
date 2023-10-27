@@ -21,7 +21,7 @@
     <div id="submitMessage" class="hidden-message visible center-align">
         <h2>Forwarded to Financial Department</h2> 
     </div>
-    {% endif %}
+{% endif %}
 
 <div class="how-to-use hidden">
     <strong>How to Use the Customer Service Portal:</strong>
@@ -34,8 +34,6 @@
     </ol>
 </div>
 
-
-
 <form method="post" action="{% url 'add_customer' %}">
     {% csrf_token %}
     {% for field in form %}
@@ -45,7 +43,7 @@
             {% if field.name == "requested_delivery_date" %}
             <div class="datepicker-container">
                 <button type="button" class="open-calendar-btn" onclick="openDatepicker('{{ field.id_for_label }}');">Open Calendar</button>
-                <input type="text" class="datepicker center-align" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value|default:'' }}" required>
+                <input type="text" class="datepicker center-align white-text" id="{{ field.id_for_label }}" name="{{ field.name }}" value="{{ field.value|default:'' }}" required>
             </div>
     
             {% elif field.name == "bed_type" %}
@@ -55,7 +53,7 @@
                         <option value="{{ option_value }}">{{ option_label }}</option>
                     {% endfor %}
                 </select>
-            {% elif field.field.widget.input_type == "text" or field.field.widget.input_type == "password" %}
+            {% elif field.field.widget.input_type == "text" or field.field.widget.input_type == "password" or field.name == "delivery_address" or field.name == "address_uk" %}
                 <input id="{{ field.id_for_label }}" type="{{ field.field.widget.input_type }}" name="{{ field.name }}" required class="browser-default">
             {% else %}
                 {{ field }}
@@ -74,26 +72,19 @@
         <a href="{% url 'logout' %}" class="logout-button">Logout</a>
     </div>
 </form>
- 
-
+{% endblock %}
     
-    
-    
-    {% endblock %}
-    
-    {% block extra_js %}
-    <script src="{% static 'js/combinedService.js' %}"></script>
-
-    <script>
+{% block extra_js %}
+<script src="{% static 'js/combinedService.js' %}"></script>
+<script>
     var elems = document.querySelectorAll('.datepicker');
     var instances = M.Datepicker.init(elems, {
-    format: 'yyyy-mm-dd'
-});
+        format: 'yyyy-mm-dd'
+    });
 
     window.openDatepicker = function(elementId) {
-    var instance = M.Datepicker.getInstance(document.getElementById(elementId));
-    instance.open();
-};
-
-    </script>
-    {% endblock %}
+        var instance = M.Datepicker.getInstance(document.getElementById(elementId));
+        instance.open();
+    };
+</script>
+{% endblock %}
