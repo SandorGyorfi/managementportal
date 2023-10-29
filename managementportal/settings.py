@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['bedmanagementportal-a0da47a1a5c7.herokuapp.com']
 
@@ -95,6 +95,10 @@ DATABASES = {
         'PORT': config('DB_PORT'),
     }
 }
+
+DATABASES['default']['CONN_MAX_AGE'] = 500
+DATABASES['default']['SSL_REQUIRE'] = True
+
 
 
 
