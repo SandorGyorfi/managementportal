@@ -1,91 +1,143 @@
 {% extends "base.html" %}
 
-{% block title %}Head Office - Management Portal{% endblock %}
-{% block navbar_title %}Head Office Department{% endblock %}
+{% block title %}
+Head Office - Management Portal
+{% endblock %}
+{% block navbar_title %}
+Head Office Department
+{% endblock %}
 
 {% block content %}
 <div class="container">
-  
-  {% if messages %}
-  {% for message in messages %}
-  <div id="errorMessage" class="visible center-align">
-    <h2>{{ message }}</h2>
-  </div>
-  {% endfor %}
-  {% endif %}
-  
-  <h1 class="dashboard">Dashboard:</h1>
-  
-  <div class="panel">
-    <h2 class="center-align">Overdue Deliveries:</h2>
-    {% if overdue_deliveries %}
-    <table class="overdue">
-      <tbody>
-        {% for delivery in overdue_deliveries %}
-        <tr>
-          <td>{{ delivery.customer.full_name }}</td>
-          <td>{{ delivery.delivery_date }}</td>
-          <td>{{ delivery.customer.phone_number }}</td>
-          <td>{{ delivery.status }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-    <p>No overdue deliveries at the moment.</p>
-    {% endif %}
-  </div>
-  <div class="panel-row">
-    <div>
-      <h2 class="center-align">New Customers Waiting for Payment:</h2>
-      {% if pending_payments %}
-      <table class="panel waiting-for-payment">
-          <tbody>
-              {% for payment in pending_payments %}
-              <tr>
-                  <td>{{ payment.customer.full_name }}</td>
-                  <td>{{ payment.status }}</td>
-              </tr>
-              {% endfor %}
-          </tbody>
-      </table>
-      {% else %}
-      <p>No customers waiting for payment at the moment.</p>
-      {% endif %}
-  </div>
-  
 
-    <div>
-      <h2 class="center-align">Customers Waiting for Delivery:</h2>
-      {% if out_for_deliveries %}
-      <table class="panel waiting-for-delivery">
-          <tbody>
-              {% for delivery in out_for_deliveries %}
-              {% if delivery.delivery_date >= today %}  
-              <tr>
-                  <td>{{ delivery.customer.full_name }}</td>
-                  <td>{{ delivery.delivery_date }}</td>
-              </tr>
-              {% endif %}
-              {% endfor %}
-          </tbody>
-      </table>
-      {% else %}
-      <p>No customers waiting for delivery at the moment.</p>
-      {% endif %}
-  </div>
+    {% if messages %}
+    {% for message in messages %}
+    <div id="errorMessage" class="visible center-align">
+        <h2>{{ message }}</h2>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <h1 class="dashboard">Dashboard:</h1>
+
+    <div class="panel">
+        <h2 class="center-align">Overdue Deliveries:</h2>
+        {% if overdue_deliveries %}
+        <table class="overdue">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Delivery Date</th>
+                    <th>Phone Number</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for delivery in overdue_deliveries %}
+                <tr>
+                    <td>{{ delivery.customer.full_name }}</td>
+                    <td>{{ delivery.delivery_date }}</td>
+                    <td>{{ delivery.customer.phone_number }}</td>
+                    <td>{{ delivery.status }}</td>
+                    <td><button onclick="openModal({{ delivery.customer.id }})">Delete</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No overdue deliveries at the moment.</p>
+        {% endif %}
+    </div>
+
+    <div class="panel-row">
+        <div>
+            <h2 class="center-align">New Customers Waiting for Payment:</h2>
+            {% if pending_payments %}
+            <table class="panel waiting-for-payment">
+                <tbody>
+                    {% for payment in pending_payments %}
+                    <tr>
+                        <td>{{ payment.customer.full_name }}</td>
+                        <td>{{ payment.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No customers waiting for payment at the moment.</p>
+            {% endif %}
+        </div>
+
+        <div>
+            <h2 class="center-align">Customers Waiting for Delivery:</h2>
+            {% if out_for_deliveries %}
+            <table class="panel waiting-for-delivery">
+                <tbody>
+                    {% for delivery in out_for_deliveries %}
+                    {% if delivery.delivery_date >= today %}
+                    <tr>
+                        <td>{{ delivery.customer.full_name }}</td>
+                        <td>{{ delivery.delivery_date }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No customers waiting for delivery at the moment.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="button-container">
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </div>
+
+    <div class="panel contact-panel center-align">
+        <h2>Contact Departments:</h2>
+        <ul>
+            <li>Head Office: +123456785</li>
+            <li>Customer Service: +123456786</li>
+            <li>Financial Department: +123456787</li>
+            <li>Delivery Department: +123456788</li>
+        </ul>
+    </div>
+
+    <div id="verificationModal" class="modal">
+        <div class="modal-content">
+            <h4>Operator Verification</h4>
+            <p>Please enter operator's name and pin code to delete an order.</p>
+            <form action="{% url 'head_office:delete_order' 0 %}" method="POST" id="verificationForm">
+                {% csrf_token %}
+                <input type="hidden" id="customerIdToDelete" name="customer_id" value="0">
+                <div>
+                    <label for="operator_name">Operator Name:</label>
+                    <input type="text" name="operator_name" required>
+                </div>
+                <div>
+                    <label for="pin_code">Pin Code:</label>
+                    <input type="password" name="pin_code" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" onclick="closeModal()">Cancel</button>
+                    <button type="submit">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function openModal(customerId) {
+            document.getElementById('customerIdToDelete').value = customerId;
+            document.getElementById('verificationForm').action = "{% url 'head_office:delete_order' 0 %}".replace('0', customerId);
+            document.getElementById('verificationModal').style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById('verificationModal').style.display = "none";
+        }
+    </script>
 </div>
-<div class="button-container">
-  <a href="{% url 'logout' %}" class="logout-button">Logout</a>
-</div>
-</div>
-<div class="panel contact-panel center-align">
-  <h2>Contact Departments:</h2>
-  <ul>
-    <li>Head Office: +123456785</li>
-    <li>Customer Service: +123456786</li>
-    <li>Financial Department: +123456787</li>
-    <li>Delivery Department: +123456788</li>
-  </ul>
-</div>
+
 {% endblock %}
