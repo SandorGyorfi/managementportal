@@ -40,7 +40,7 @@ Head Office Department
                     <td>{{ delivery.delivery_date }}</td>
                     <td>{{ delivery.customer.phone_number }}</td>
                     <td>{{ delivery.status }}</td>
-                    <td><button onclick="openModal({{ delivery.customer.id }})">Delete</button></td>
+                    <td><button class="button-container" onclick="openModal({{ delivery.customer.id }})">Delete</button></td>
                 </tr>
                 {% endfor %}
             </tbody>
