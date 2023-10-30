@@ -128,16 +128,18 @@ Head Office Department
     </div>
 
     <script>
-        function openModal(customerId) {
-            document.getElementById('customerIdToDelete').value = customerId;
-            document.getElementById('verificationForm').action = "{% url 'head_office:delete_order' 0 %}".replace('0', customerId);
-            document.getElementById('verificationModal').style.display = "block";
-        }
-
-        function closeModal() {
-            document.getElementById('verificationModal').style.display = "none";
-        }
-    </script>
+      function openModal(customerId) {
+          console.log("openModal function executed with ID:", customerId); 
+          document.getElementById('customerIdToDelete').value = customerId;
+          document.getElementById('verificationForm').action = "{% url 'head_office:delete_order' 0 %}".replace('0', customerId);
+          document.getElementById('verificationModal').style.display = "block";
+      }
+  
+      function closeModal() {
+          document.getElementById('verificationModal').style.display = "none";
+      }
+  </script>
+  
 </div>
 
 {% endblock %}
