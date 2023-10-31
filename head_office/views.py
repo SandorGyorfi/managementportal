@@ -30,10 +30,11 @@ def delete_payment(request, payment_id):
     if request.method == "POST":
         payment = get_object_or_404(Payment, id=payment_id)
         payment.delete()
-    return redirect(reverse('view_head_office'))
+    return redirect(reverse('head_office:view_head_office'))
+
 
 def delete_delivery(request, delivery_id):
     if request.method == "POST":
         delivery = get_object_or_404(Delivery, id=delivery_id)
         delivery.delete()
-    return redirect(reverse('view_head_office'))
+    return redirect(reverse('head_office:view_head_office'))
