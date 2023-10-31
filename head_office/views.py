@@ -27,11 +27,13 @@ def view_head_office(request):
     return render(request, 'head_office/head_office.html', context)
 
 def delete_payment(request, payment_id):
-    payment = get_object_or_404(Payment, id=payment_id)
-    payment.delete()
+    if request.method == "POST":
+        payment = get_object_or_404(Payment, id=payment_id)
+        payment.delete()
     return redirect(reverse('view_head_office'))
 
 def delete_delivery(request, delivery_id):
-    delivery = get_object_or_404(Delivery, id=delivery_id)
-    delivery.delete()
+    if request.method == "POST":
+        delivery = get_object_or_404(Delivery, id=delivery_id)
+        delivery.delete()
     return redirect(reverse('view_head_office'))
