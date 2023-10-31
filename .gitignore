@@ -13,4 +13,3 @@ staticfiles/
 .env
 venv/
 node_modules/
-readme.md
