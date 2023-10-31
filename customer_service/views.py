@@ -39,7 +39,7 @@ def operator_login(request):
                 elif department == 'delivery_department':
                     return redirect('delivery_department:view_deliveries')
                 elif department == 'head_office':
-                    return redirect('head_office:head_office')
+                    return redirect('head_office:view_head_office')
             else:
                 print("User is NOT authenticated!")
                 error = 'Unable to authenticate user'
