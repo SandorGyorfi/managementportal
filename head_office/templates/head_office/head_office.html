@@ -27,6 +27,9 @@
           <td>{{ delivery.delivery_date }}</td>
           <td>{{ delivery.customer.phone_number }}</td>
           <td>{{ delivery.status }}</td>
+          <td>
+            <a href="{% url 'delete_delivery' delivery.id %}" class="logout-button" onclick="return confirm('Are you sure you want to delete this delivery?');">Delete</a>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
@@ -35,49 +38,54 @@
     <p>No overdue deliveries at the moment.</p>
     {% endif %}
   </div>
+
   <div class="panel-row">
     <div>
       <h2 class="center-align">New Customers Waiting for Payment:</h2>
       {% if pending_payments %}
       <table class="panel waiting-for-payment">
-          <tbody>
-              {% for payment in pending_payments %}
-              <tr>
-                  <td>{{ payment.customer.full_name }}</td>
-                  <td>{{ payment.status }}</td>
-              </tr>
-              {% endfor %}
-          </tbody>
+        <tbody>
+          {% for payment in pending_payments %}
+          <tr>
+            <td>{{ payment.customer.full_name }}</td>
+            <td>{{ payment.status }}</td>
+            <td>
+              <a href="{% url 'delete_payment' payment.id %}" class="logout-button" onclick="return confirm('Are you sure you want to delete this payment?');">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
       </table>
       {% else %}
       <p>No customers waiting for payment at the moment.</p>
       {% endif %}
-  </div>
-  
+    </div>
 
     <div>
       <h2 class="center-align">Customers Waiting for Delivery:</h2>
       {% if out_for_deliveries %}
       <table class="panel waiting-for-delivery">
-          <tbody>
-              {% for delivery in out_for_deliveries %}
-              {% if delivery.delivery_date >= today %}  
-              <tr>
-                  <td>{{ delivery.customer.full_name }}</td>
-                  <td>{{ delivery.delivery_date }}</td>
-              </tr>
-              {% endif %}
-              {% endfor %}
-          </tbody>
+        <tbody>
+          {% for delivery in out_for_deliveries %}
+          {% if delivery.delivery_date >= today %}  
+          <tr>
+            <td>{{ delivery.customer.full_name }}</td>
+            <td>{{ delivery.delivery_date }}</td>
+          </tr>
+          {% endif %}
+          {% endfor %}
+        </tbody>
       </table>
       {% else %}
       <p>No customers waiting for delivery at the moment.</p>
       {% endif %}
+    </div>
   </div>
-</div>
-<div class="button-container">
-  <a href="{% url 'logout' %}" class="logout-button">Logout</a>
-</div>
+  
+  <div class="button-container">
+    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+  </div>
+
 </div>
 <div class="panel contact-panel center-align">
   <h2>Contact Departments:</h2>
