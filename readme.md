@@ -2,26 +2,30 @@
 
 # Management Portal: Modernizing Bed Ordering Process
 
-Welcome to the Management Portal. This platform represents the first version of my concept for a real company, aiming to offer a next-generation solution that modernizes the hospital bed ordering process. By integrating telephonic coordination with digital touchpoints, our goal is to centralize and streamline order processes to achieve optimal operational efficiency. As we continue to gather feedback and iterate, we anticipate enhancing the platform's capabilities to better serve our partners and customers.
 
+Welcome to the Management Portal. This platform represents my vision for modernizing the hospital bed ordering process. By integrating telephonic coordination with digital touchpoints, I aim to centralize and streamline order processes to achieve optimal operational efficiency. I am constantly iterating based on feedback to further enhance the platform and provide a better experience.
+
+<img src="static\images\mockup.png" alt="Department Login Screenshot">
 
 ## 📑 Table of Contents
 - [Features](#features)
-- [How to Use](#how-to-use)
-  - [Department Login](#department-login)
-  - [Customer Service](#customer-service)
-  - [Financial Department](#financial-department)
-  - [Delivery Management](#delivery-management)
-  - [Head Office Dashboard](#head-office-dashboard)
-- [Contact Details](#contact-details)
-- [Security & Others](#security--others)
-
-
+- [UX Plane](#ux-plane)
+- [Technologies and Frameworks Utilized](#technologies-and-frameworks-utilized)
+- [🌐 Data Flow Map ](#🌐-data-flow-map)
+- [Future Technology Considerations](#future-technology-considerations)
+- [Tests and results](#tests-and-results)
+- [🚀 Deployment](#🚀-deployment)
+- [📚 Resources](#📚-resources)
+- [🏆 Credits](#🏆-credits)
+- [📞 Contact](#📞-contact)
 
 
 # Features
 - 📊 **Real-time Tracking:** Stay updated on bed order status.
 - 📈 **Data Analytics:** Make data-driven decisions with robust tools.
+
+To visit click [here](https://bedmanagementportal-a0da47a1a5c7.herokuapp.com/). To login for test purposes please contact me for PIN.
+
 
 ## Department Login
 <img src="static\images\portal_login_ss.png" alt="Department Login Screenshot" width="500px">
@@ -40,9 +44,9 @@ Access to the Management Portal begins here. Designed for simplicity, ensuring u
 - **Security**: Prioritizing user data confidentiality.
 
 ## Customer Service Portal
-<img src="static\images\add_customer_data_ss.png" alt="Customer Service Screenshot" width="500px" border="1px">
+<img src="static\images\add_customer_data_ss.png" alt="Customer Service Screenshot" width="500px">
 
-Staff can input details of new or existing customers to optimize service delivery.
+Users can input details of new or existing customers to optimize service delivery.
 
 ### Components
 - **Full name**: For the customer's complete name.
@@ -57,7 +61,7 @@ Staff can input details of new or existing customers to optimize service deliver
 - **Functional**: Error-free date selection.
 
 ## Financial Department Portal
-<img src="static\images\pending_payments_ss.png" alt="Financial Department Screenshot" width="500px" border="1px">
+<img src="static\images\pending_payments_ss.png" alt="Financial Department Screenshot" width="500px">
 
 Focused on customer payment processing and ensuring synchronization with delivery.
 
@@ -73,7 +77,7 @@ Focused on customer payment processing and ensuring synchronization with deliver
 - Error tracking for payment issues.
 
 ## Delivery Management Portal
-<img src="static\images\delivered_ss.png" alt="Delivery Management Screenshot" width="500px" border="1px">
+<img src="static\images\delivered_ss.png" alt="Delivery Management Screenshot" width="500px">
 
 For efficient delivery management and tracking.
 
@@ -88,9 +92,9 @@ For efficient delivery management and tracking.
 - Guide for portal use.
 
 ## Head Office Dashboard
-<img src="static\images\head_office_dashboard_ss.png" alt="Head Office Dashboard Screenshot" width="500px" border="1px">
+<img src="static\images\head_office_dashboard_ss.png" alt="Head Office Dashboard Screenshot" width="500px">
 
-Centralized interface for insights into delivery, payments, and order progress.
+A centralized interface providing insights into delivery, payments, and order progress.
 
 ### Overview
 - **Overdue Deliveries**: List of past-due deliveries.
@@ -110,17 +114,23 @@ For inquiries or assistance:
 - **Financial Department**: +123456787
 - **Delivery Department**: +123456788
 
-# UX Plan
+----
+
+# UX Plane
 
 ## Overview
+
 ManagementPortal offers a streamlined platform for task and responsibility management across various devices.
 
 ## Responsiveness
+
 - **Mobile-Friendly**: Adaptive design for smartphones and tablets.
 - **Tablet & Desktop**: Optimized UI for larger screens.
 
 ## Strategy Plane
+
 ### User Needs
+
 - Efficient task management.
 - Organizational tools.
 - Dashboard customization.
@@ -128,10 +138,13 @@ ManagementPortal offers a streamlined platform for task and responsibility manag
 - Admin controls.
 
 ### Business Goals
+
 Deliver a rich application to enhance user engagement and satisfaction.
 
 ## Scope Plane
+
 ### Features
+
 - Task creation, editing, deletion.
 - Task categorization.
 - Customizable dashboards.
@@ -139,16 +152,21 @@ Deliver a rich application to enhance user engagement and satisfaction.
 - Admin controls.
 
 ## Structure Plane
+
 Organized navigation and clear information hierarchy.
 
 ## Skeleton Plane
+
 ### UI Design
+
 - Clear labels and indicators.
 - Consistent color theme.
 - Accessible controls.
 
 ## Surface Plane
+
 ### Visual Design
+
 - Vibrant color palette (`--primary-color`, `--secondary-color`).
 - Modern icons.
 - Clear typography.
@@ -156,21 +174,8 @@ Organized navigation and clear information hierarchy.
 
 ---
 
-
 # Technologies and Frameworks Utilized
 
-## 📑 Table of Contents
-- [Web Framework](#web-framework)
-- [Front-end Components](#front-end-components)
-- [Backend Configuration](#backend-configuration)
-- [Database](#database)
-- [Authentication](#authentication)
-- [Static Files Management](#static-files-management)
-- [Middleware](#middleware)
-- [Internationalization](#internationalization)
-- [Future Technology Considerations](#future-technology-considerations)
-
----
 
 ## Web Framework
 
@@ -205,6 +210,7 @@ Organized navigation and clear information hierarchy.
 ---
 
 ## ⚙️ **Django Settings**
+
 - 🚀 **Version**: 4.2.6
 - 🔑 Managed using `decouple`
 - 💳 **Stripe Integration**: For payment processing
@@ -219,6 +225,7 @@ Organized navigation and clear information hierarchy.
 ---
 
 ## 🔒 **Authentication**
+
 - 🌐 **Login URL**: `'/'`
 - 🖥️ **View**: `customer_service_views.operator_login`
 - 🚪 **Logout**: Accessible via `logout` URL
@@ -226,6 +233,7 @@ Organized navigation and clear information hierarchy.
 ---
 
 ## 🏢 **Head Office**
+
 - 📋 Displays:
   - 🧑‍💼 Customer info
   - 💲 Payment info
@@ -235,6 +243,7 @@ Organized navigation and clear information hierarchy.
 ---
 
 ## 📞 **Customer Service**
+
 - ➕ **Actions**:
   - Customer addition
   - Generation of payment objects
@@ -242,12 +251,14 @@ Organized navigation and clear information hierarchy.
 ---
 
 ## 💰 **Financial Department**
+
 - 🪙 **Stripe**: Used for payment processing
 - 📅 **Post-Payment**: Assigns delivery date & creates delivery object
 
 ---
 
 ## 🚚 **Delivery Department**
+
 - 📋 **Management**: 
   - Delivery details
   - Delivery statuses (e.g., marked as delivered)
@@ -255,6 +266,7 @@ Organized navigation and clear information hierarchy.
 ---
 
 ## 🔗 **URL Configuration**
+
 - 🕸️ **Primary**: Configuration in `managementportal`
 - 🌐 **Base URL**: `'/'` redirects to the login page
 - 📁 **Departmental URLs**: Separate sets for:
@@ -266,14 +278,13 @@ Organized navigation and clear information hierarchy.
 ---
 
 ## 🤝 **Relationships**
+
 - 🧑‍💼 **Customer**: Individual representation
 - 💲 **Payment**: Linked with `Customer`, manages details
 - 📦 **Delivery**: Linked with `Customer`, manages details & status
 - 🚪 **DepartmentUser**: Represents department operators, manages authentication
 
-
-
-----
+---
 
 ## Database
 
@@ -316,25 +327,24 @@ Organized navigation and clear information hierarchy.
 
 | Technology | Description |
 |------------|-------------|
-| Locale     | `en-us` indicating the primary language and locale as English (United States). |
+| Local     | `en-us` indicating the primary language and local as English (United States). |
 | Timezone   | Coordinated Universal Time (UTC) is used. |
 
 ---
 
+
 # Future Technology Considerations
 
-| Technology Category | Description |
-|---------------------|-------------|
-| **Warehouse Operator System** | Planning to complete the warehouse operator system software with scanning capabilities. This will streamline the inventory management and tracking process. |
-| **Automatic Invoicing** | Introducing an automatic invoicing system to simplify the billing process and ensure timely and accurate billing. |
-| **Delivery Live Tracking** | Incorporating live tracking of deliveries, allowing customers to track their rented beds in real-time and anticipate delivery times more accurately. |
-| **Bed Rental System** | Updating the service structure to enable customers to rent beds. This will enhance flexibility and offer customers a more tailored solution. |
-| **Mobile App Development** | Exploring the development of a dedicated mobile application using frameworks like React Native or Flutter. This would enhance accessibility and user engagement on mobile devices. |
-| **AI Integration** | Implementing AI and ML libraries to enable intelligent decision-making, predictive analytics, and personalized recommendations for users. |
-| **Advanced Security Measures** | Enhancing security with technologies like MFA, biometric authentication, and blockchain-based solutions. 
-| **Enhanced Analytics and Reporting** | Integrating advanced analytics and reporting tools for deeper insights, customizable dashboards, and interactive reports. |
-
-
+| Technology Category           | Description                                                                                                                                                      |
+|-------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Warehouse Operator System** | Planning to complete the warehouse operator system software with scanning capabilities. This will streamline the inventory management and tracking process.       |
+| **Automatic Invoicing**       | Introducing an automatic invoicing system to simplify the billing process and ensure timely and accurate billing.                                                |
+| **Delivery Live Tracking**    | Incorporating live tracking of deliveries, allowing customers to track their rented beds in real-time and anticipate delivery times more accurately.               |
+| **Bed Rental System**         | Updating the service structure to enable customers to rent beds. This will enhance flexibility and offer customers a more tailored solution.                      |
+| **Mobile App Development**    | Exploring the development of a dedicated mobile application using frameworks like React Native or Flutter. This would enhance accessibility and user engagement on mobile devices. |
+| **AI Integration**            | Implementing AI and ML libraries to enable intelligent decision-making, predictive analytics, and personalized recommendations for users.                          |
+| **Advanced Security Measures**| Enhancing security with technologies like MFA, biometric authentication, and blockchain-based solutions.                                                          |
+| **Enhanced Analytics and Reporting** | Integrating advanced analytics and reporting tools for deeper insights, customizable dashboards, and interactive reports.                                        |
 
 ---
 
@@ -344,31 +354,30 @@ Organized navigation and clear information hierarchy.
 
 Below is a list of functions in the Management Portal project that have been tested with Pytest and have passed:
 
-| Function Name         | Description                                                                                     |
-|-----------------------|-------------------------------------------------------------------------------------------------|
-| **`operator_login`**  | Handles operator login and authentication.                                                      |
-| **`add_customer`**    | Allows operators to add customers to the system and creates pending payment records for them.  |
-| **`view_head_office`**| Displays pending customers, pending payments, out-for-delivery items, and overdue deliveries.  |
+| Function Name             | Description                                                                                                                                                        |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **`operator_login`**      | Handles operator login and authentication.                                                                                                                         |
+| **`add_customer`**        | Allows operators to add customers to the system and creates pending payment records for them.                                                                       |
+| **`view_head_office`**    | Displays pending customers, pending payments, out-for-delivery items, and overdue deliveries.                                                                      |
 
 ![Head Office App Test](static/images/head_office_app_test.png)
 
-| **`view_payments`**   | Displays pending payment records in the financial department view and handles payment processing. |
-| **`process_payment`** | Processes payments for customers, charges the customer's credit card using the Stripe API, and updates the payment status. |
+| **`view_payments`**       | Displays pending payment records in the financial department view and handles payment processing.                                                                   |
+| **`process_payment`**     | Processes payments for customers, charges the customer's credit card using the Stripe API, and updates the payment status.                                         |
 
 ![Financial Department Test](static/images/financial_department_test.png)
 
-| **`view_deliveries`** | Displays all future deliveries, today's deliveries, and overdue deliveries for the delivery department. |
+| **`view_deliveries`**     | Displays all future deliveries, today's deliveries, and overdue deliveries for the delivery department.                                                            |
 
 ![Delivery Department Test](static/images/delivery_department_test.png)
 
-| **`update_delivery`** | Allows updating the status of a specific delivery to "Delivered." |
+| **`update_delivery`**     | Allows updating the status of a specific delivery to "Delivered."                                                                                                  |
 
 ---
 
 **These functions have been thoroughly tested with Pytest to ensure their functionality and correctness.**
+
 ---
-
-
 
 # **🚀 Deployment**
 
@@ -382,20 +391,14 @@ Below is a list of functions in the Management Portal project that have been tes
 
 Version control remains at the heart of *ManagementPortal*, encouraging collaboration, meticulous code organization, and an eagle-eyed tracking of every code modification.
 
-- **Git & GitHub**: While Git paves the way for multiple developers to work together, GitHub offers an online hub to store Git repositories, complemented by collaboration tools.
-  
-- **Commit History**: Reflects each adjustment made to the codebase. Every commit comes with a clear, concise message that unravels the reason behind the change.
-  
-- **Branching Strategy**: A structured approach is in place to tackle features, bugs, and development phases. While the main branch showcases a production-ready version, feature branches focus on new additions or specific fixes. Comprehensive reviews prior to any merges ensure code integrity.
-  
-- **Release Tagging**: Essential for marking significant milestones or versions, assisting in easy referencing when needed.
-  
-- **Collaboration & Contribution**: Keen to make a mark? Fork the repository, make your changes, and put forth pull requests to enhance the main codebase. Regular reviews and discussions ensure the gold standard of quality is maintained.
-  
+- **Git & GitHub**: While Git paves the way for multiple developers to work together, GitHub offers an online hub to store Git repositories, complemented by collaboration tools. 
+- **Commit History**: Reflects each adjustment made to the codebase. Every commit comes with a clear, concise message that unravels the reason behind the change. 
+- **Branching Strategy**: A structured approach is in place to tackle features, bugs, and development phases. While the main branch showcases a production-ready version, feature branches focus on new additions or specific fixes. Comprehensive reviews prior to any merges ensure code integrity. 
+- **Release Tagging**: Essential for marking significant milestones or versions, assisting in easy referencing when needed. 
+- **Collaboration & Contribution**: Keen to make a mark? Fork the repository, make your changes, and put forth pull requests to enhance the main codebase. Regular reviews and discussions ensure the gold standard of quality is maintained. 
 - **Continuous Integration**: GitHub Actions drive the CI, running automated tests for each PR and push, ensuring nothing breaks the existing rhythm.
 
 ---
-
 
 ### **🤝 How to Contribute**
 
@@ -411,7 +414,7 @@ Desiring to be a part of *ManagementPortal*? Here's how:
 
 ---
 
-## **📚 Resources**
+# **📚 Resources**
 
 *ManagementPortal*'s success can be attributed to a wealth of online platforms:
 
@@ -426,7 +429,7 @@ A heartfelt gratitude to the numerous creators and educators who've shared their
 
 ---
 
-## **🏆 Credits**
+# **🏆 Credits**
 
 #### **Code and Content**
 Every line of code and content, painstakingly penned down by [Sandor Gyorfi](https://github.com/sandorgyorfi). Your dedication towards crafting a premier portal management tool is commendable.
@@ -446,5 +449,6 @@ Queries? Feedback? Drop an email at [mr.sandorgyorfi@gmail.com](mailto:mr.sandor
 
 ---
 
+[⬆️ Back to Top](#management-portal-modernizing-bed-ordering-process)
 
 </div>
